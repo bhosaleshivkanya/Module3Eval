@@ -54,7 +54,7 @@ function AddRestaurant() {
         <input type="checkbox" name="parkingLot" onChange={handleChange} />
       </label>
 
-      <input name="image" placeholder="Image URL" onChange={handleChange} />
+      <input name="image" placeholder="https://coding-platform.s3.amazonaws.com/dev/lms/tickets/7524df6e-46fa-4506-8766-eca8da47c2f1/2izhqnTaNLdenHYF.jpeg" onChange={handleChange} />
 
       <button>Add</button>
     </form>
