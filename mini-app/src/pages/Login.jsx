@@ -1,50 +1,34 @@
-import { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
-const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const { login, role } = useContext(AuthContext);
+function Login() {
+  const { login } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const success = login(email, password);
-
-    if (success) {
-      if (role === "admin") {
-        navigate("/admin/dashboard");
-      } else {
-        navigate("/customer/dashboard");
-      }
-    }
-  };
-
   return (
-    <div style={{ padding: "20px" }}>
+    <div>
       <h2>Login</h2>
 
-      <form onSubmit={handleSubmit}>
-        <input
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <br /><br />
+      <button
+        onClick={() => {
+          login("admin");
+          navigate("/admin/dashboard");
+        }}
+      >
+        Login as Admin
+      </button>
 
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <br /><br />
-
-        <button type="submit">Login</button>
-      </form>
+      <button
+        onClick={() => {
+          login("customer");
+          navigate("/customers/dashboard");
+        }}
+      >
+        Login as Customer
+      </button>
     </div>
   );
-};
+}
 
 export default Login;
