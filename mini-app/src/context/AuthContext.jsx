@@ -1,5 +1,36 @@
-import { Children, createContext, useState } from "react";
+import { createContext, useState } from "react";
+
 export const AuthContext = createContext();
-export const AuthProvider=({Children}) => {
-    const [isAuth, setIsAuth]=
-}
+
+export const AuthProvider = ({ children }) => {
+  const [isAuth, setIsAuth] = useState(false);
+  const [role, setRole] = useState("");
+
+  const login = (email, password) => {
+    if (email === "admin@gmail.com" && password === "admin1234") {
+      setIsAuth(true);
+      setRole("admin");
+      return true;
+    }
+
+    if (email === "customer@gmail.com" && password === "customer1234") {
+      setIsAuth(true);
+      setRole("customer");
+      return true;
+    }
+
+    alert("Wrong credentials");
+    return false;
+  };
+
+  const logout = () => {
+    setIsAuth(false);
+    setRole("");
+  };
+
+  return (
+    <AuthContext.Provider value={{ isAuth, role, login, logout }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
